@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Is Linux an OS or a kernel? A beginner's guide to the kernel, how it differs from an operating system, where Linux distros come from, and what lives in each Linux directory.">
+<meta name="author" content="Mohammed Aseem">
+<meta property="og:title" content="Understanding Kernel, Distros and File Systems in Linux - Mohammed Aseem">
+<meta property="og:description" content="Is Linux an OS or a kernel? A beginner's guide to the kernel, how it differs from an operating system, where Linux distros come from, and what lives in each Linux directory.">
+<meta property="og:type" content="article">
+<title>Understanding Kernel, Distros and File Systems in Linux · Mohammed Aseem</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%230A0A09'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Helvetica,Arial,sans-serif'%20font-size='27'%20font-weight='700'%20letter-spacing='-1'%20fill='%23D8AE3E'%20text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="top">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../index.html">Mohammed <em>Aseem</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../index.html#projects">Projects</a></li>
+      <li><a href="../index.html">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="tt-text" id="themeText">Light</span>
+        <span class="tt-track"><span class="tt-knob" id="themeIcon" aria-hidden="true">☀</span></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── ARTICLE ── -->
+<main class="article">
+  <article class="article-inner">
+    <a class="back-link" href="../index.html#basics">← All Basics posts</a>
+
+    <div class="post-meta">
+      <span class="post-tag">Basics</span>
+      <span>4 min read</span>
+    </div>
+    <h1 class="article-title">Understanding Kernel, Distros and File Systems in Linux</h1>
+    <p class="article-sub">Is Linux an OS or a kernel? What a kernel does, where distros come from, and what lives in each Linux directory.</p>
+
+    <img class="article-cover" src="https://blogger.googleusercontent.com/img/a/AVvXsEiG0Bum1oAbye__XpVDHBgvQKLYcLk9VZz9x7HUHgohAd0uNUcTgwhEyJdNSXxKPRnMil13cf96Dwm6xjKXJo9xYn70mTmpc-D_qJGuxsbpRSkQRExlmz2eDwFmQoQusrlZ6nJAvjFFwwKbTKsHF3NFNnqQubUkos7chEpC2Z3SG6yZSPj-LdtMhJQo" alt="Linux kernel, distros and file systems cover image">
+
+    <div class="prose">
+      <p>I hope many of you are familiar with the term “Linux”. But my question is: what is Linux?</p>
+      <p>Some of you will say Linux is an OS while some of you will say Linux is a kernel. Actually, Linux is a kernel and not an OS. So, first, let’s understand what a kernel is, then the difference between OS and kernel.</p>
+
+      <h2>Kernel</h2>
+      <p>A kernel is one of the system software in Operating Systems which acts as a bridge between applications and hardware components.</p>
+
+      <h3>Operating System vs Kernel</h3>
+      <ul>
+        <li>The operating system is a bridge between user and hardware while Kernel is a bridge between applications and hardware.</li>
+        <li>An operating system is a system software while Kernel is a software which is a part of the OS.</li>
+        <li>All operating systems need a kernel to run.</li>
+        <li>When you boot the computer, OS is the first program that loads while the kernel is the first program that loads when OS loads.</li>
+        <li>Example of the kernel: Linux</li>
+        <li>Examples of OS: Ubuntu, Fedora, Kali</li>
+      </ul>
+      <figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEiSdH2s-aJCSxQHRk8_BeUOeVXGvhgB7rIo--I52PNKOMXqgCoHNG7i0NtvCIdKXSfgNaaWlUjjuWpX5oJOuzguvVige5wBF-9XWCXqGT3-PfWOuXUQO9WqVSvJUl08fTt5Mz-sRYvCZR4-4h-VvheWxVS_EJjF-ZC4-3VI6SoZdi6Tqp0pV5f5eN_Y" loading="lazy" alt="Layers from user to applications, kernel and hardware, showing where the OS and kernel sit"></figure>
+
+      <h2>Linux Distributions</h2>
+      <p>Linux Distributions or Linux Distros are the operating systems that include the Linux kernel. Linus Torvalds developed the Linux kernel and released its first version 0.01 in August 1991. The earliest distro was MCC Interim Linux released in February 1992. There are almost one thousand Linux distros.</p>
+      <p>There are some famous distros such as Debian, Slackware, RedHat and Arch Linux. Some famous distros like Ubuntu, Kali and Parrot are Debian based Linux distros. For a more detailed understanding of Linux distros, see the <a href="https://en.wikipedia.org/wiki/File:Linux_Distribution_Timeline_21_10_2021.svg" target="_blank" rel="noopener">Linux distribution timeline</a>.</p>
+      <p>From each distro, multiple distros were created based on it: based on RedHat, CentOS was created. Based on Debian, Ubuntu was created. Based on Ubuntu, distros like Ubuntu GNOME, Kubuntu, and Gobuntu were created.</p>
+
+      <h2>File Systems</h2>
+      <ul class="dir-list">
+        <li><strong><code>/</code></strong> — It is the root directory.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjbd7nkC2gt_LB2EnnxrfNuDbxbtvdvIfkTdK08VJDUbTiKyt4_GK2KwOIz7N0pjQDgb2BbOlYSDrEV9loBV6rr4W0QYBkVU9qdeKR8smXQc1lTJlNh8DhZ2MRSJ9sYzGGi1oapP40k09_suCQBv75acY_8kPEVrEAxQOBoJEDf6eKDRm-sTdXhKBhP" loading="lazy" alt="Terminal listing of the / directory"></li>
+        <li><strong><code>/bin</code></strong> — This is where the executable files are located.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhjWsBKgxbK94EM51tZVw3eUysWCz6Z469YZrTvJEECDGZQugjrccyo71c0EMFJJliMMaN4iBVaQJZHhPkdngoLfnRyqfY2D6SZxuF8ApKTcEyGpjm6aemBqCxbwKCW-mxzGhQzhkR5jPb-NANA0MDFwU3W9LHyjbwTQVLppezpXjZmRbbcorlozWfj" loading="lazy" alt="Terminal listing of the /bin directory"></li>
+        <li><strong><code>/dev</code></strong> — These are device drivers.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgD08ZOV3DDVRaAySo8m3TIDc752IyTBiUKUz4Xz9oPesBl-sTh3pyogfAxWaBv47cAWH9QdEIkzMNqtZ4IbMQ55RuJrNXDiBs5rEc0cawZ9goR0OF4LQK7o7-shS00EWdN7JhWIvKHZ9YJzbZN9bpvtVU-ivQ8BJz6xMmEDoPpebinGJL_dEFe6miC" loading="lazy" alt="Terminal listing of the /dev directory"></li>
+        <li><strong><code>/etc</code></strong> — The configuration files of BIOS and other similar files can be found in /etc.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiShbkIK_09AtD_hPOZoilOX1VAXsBLaGGO5J-tJLV-MT-hiOAzt0Ndk0AvyzoU6BlFGXAUSxNR3pDwifkqXwvEpakeLXGJmPNh1yfv7s7aUmJLVlbutwNYimOCStsbKoWt3sC4DFDS5WrgHkiiN_QGC5DNe9Y0H1Mii2sf-79eVyXHy57DOdCom1c4" loading="lazy" alt="Terminal listing of the /etc directory"></li>
+        <li><strong><code>/lib</code></strong> — Contains shared library files and sometimes other kernel-related files.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgwINyBwmR6LhQsn0UleEDv6XkLNL8-q4Fnc4AOmtOYndtY1FzlN7yF3eNI7WxFxvj3CgvmTuLPGw_SuVmN6P7wIDoS38rVEN0Di4nwGbxLR9CmsxrgMEdNexG4qkXo5r2m9uHj4yhw7rW-FDLQBh5Je2L_6fS3reuRfv2tHKbGwxA9-bHLtrW320d-" loading="lazy" alt="Terminal listing of the /lib directory"></li>
+        <li><strong><code>/boot</code></strong> — Contains files for booting the system.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEilYBHBDeWclCy-q_8AYpmlC9mJ3oO75JwKUFZU-Uh9xvhWbTC-qyAAGEOmyIZGENHTgD21w2lXB3lbYj63HmmkBc-aQL3Cj6dKs0AVsnE5ZlKPNsHV5MYeOewDIxZ-sSXd8-tIvjbMjffr19PAqlKoyTPtU-vGQMnXRIm_oqs4IfyaSaOWgntKBhQ_" loading="lazy" alt="Terminal listing of the /boot directory"></li>
+        <li><strong><code>/home</code></strong> — Contains home directory for users.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgdPmDQgX6uUgWgCSR0xTFaPnwPWngdjMm0Hi4N_TC40RF2LqPh4j6CwDw0zIdHpbIsGgx4M6ptASNjBxgTFwU3ljrlNhqzNw0p9MmSeSqk5delezRhEIKs0H3PisYhdCdnHqHddWwPEk2DKlzJ4GF8jkBqhOfsQBP0SOeqEiGN77L1pF32csDRcDTN" loading="lazy" alt="Terminal listing of the /home directory"></li>
+        <li><strong><code>/mnt</code></strong> — Used for mounting temporary file systems.</li>
+        <li><strong><code>/proc</code></strong> — Contains all processes as a file by process number.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhnAP-wqP5m1bQMLpj2H6NZC8yCI1_XMlel5b151mUNFpoHFI8Xomr8qUwe0H1vXrVLGUG9244_3SVL8vzJJZ1I1csBFj5gWcz_CF83FkBEX_SjGdVdTq-WRhSOvvFgW1xlic72zIbgg0ZK9_X0flsmNuenipvdF6EXmzyVA6fcH9_CLzvytbD8_MHC" loading="lazy" alt="Terminal listing of the /proc directory"></li>
+        <li><strong><code>/tmp</code></strong> — Contains temporary files.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjnGdSUnoL5W9CfoHjEnm-kkEYJclhKuEff_SVnxGTnSjAIttaRTOJHAts89zXSGQTbmeaGPVRwsdL1ks6YAJW5IgIiND_Uqwu8OEug2iU01gUYVP9TDH-hDVFL5iiadB4giEx1z21zmAFur1bpzEhTGt3ZgTIoUxF6PsGPHplr6OjSrudf2OGGlh9K" loading="lazy" alt="Terminal listing of the /tmp directory"></li>
+        <li><strong><code>/usr</code></strong> — The /usr directory is used to contain applications and files that are used and shared by and between users.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhl2eEBySTig4brink7zl8SLYFmwNDuYh-MBsFO3Yx1vGTvZ9nsYwMzWBzeY27fkzi9tB3gv0LG8O89QIIvzT87l7uWbCe1E4hOttWRQwbi-6XXL9qc9ertgJmS_q853ACK8Nvw42cECtTS2OGFmiKnFs9bw6Z_DozvSpVP8YVz6d-nP95FtFieJo-T" loading="lazy" alt="Terminal listing of the /usr directory"></li>
+        <li><strong><code>/var</code></strong> — The /var directory is used like the /usr directory, only instead of being read-only, it is writable. This directory contains system logs and other various variable data.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhmOe6aoyX29JBfGmPm5zbaS_lGEemxTRNpkOllPBdkkEl7h1IkjYLmulnH4bGhKj-wVfn84NnxZtFh0wY7oURscArGUaQ_vfXsPxlUv1-Ls0e-2HnOdY6NRzDg2T4F2t5DSc9vqbzWXlyrtdUBKEk7ek_EsOVEBxgoEkWFbGlNKct71DrF7F3ektAf" loading="lazy" alt="Terminal listing of the /var directory"></li>
+        <li><strong><code>/sbin</code></strong> — Contains executable files, usually for system administration.
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEh5pZrT0OV_qyni05JhMdmbNICNlNJunDwmOA6Jiol5dtRcYRUuxifsj5bckFRc4-0hbMPqCiv5AP75tbzDft3LkqdMVJ_MNtcmsPnFe9Qb5CtWDcO2KSeHJ0oLYUCPAgp-F85F83wHZth9GDq55sqyFljoBOSj_ipJ52f8-cmbuDsH6djYWch6Ui72" loading="lazy" alt="Terminal listing of the /sbin directory"></li>
+        <li><strong><code>/media</code></strong> — Contains subdirectories where your physical media devices are mounted. For example, a CD, if inserted into your system, you can access its contents through its directory that is created in the /media directory upon insertion.</li>
+      </ul>
+
+      <hr>
+      <p>I hope you might have got a clear understanding of Kernel, Distros and the file system of Linux. Happy reading!</p>
+     
+    </div>
+  </article>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Mohammed <strong>Aseem</strong> &nbsp;·&nbsp; Security Engineer</div>
+  </div>
+</footer>
+
+<script src="../assets/blog.js"></script>
+</body>
+</html>

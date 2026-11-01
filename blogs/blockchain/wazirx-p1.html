@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="How $234.9M was drained from WazirX's Liminal-managed multisig hot wallet in July 2024: wallet types, the signing setup, and early analysis of the attack.">
+<meta name="author" content="Mohammed Aseem">
+<meta property="og:title" content="Decoding WazirX Assets Breach - Mohammed Aseem">
+<meta property="og:description" content="How $234.9M was drained from WazirX's Liminal-managed multisig hot wallet in July 2024: wallet types, the signing setup, and early analysis of the attack.">
+<meta property="og:type" content="article">
+<title>Decoding WazirX Assets Breach · Mohammed Aseem</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%230A0A09'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Helvetica,Arial,sans-serif'%20font-size='27'%20font-weight='700'%20letter-spacing='-1'%20fill='%23D8AE3E'%20text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="top">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../index.html">Mohammed <em>Aseem</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../index.html#projects">Projects</a></li>
+      <li><a href="../index.html">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="tt-text" id="themeText">Light</span>
+        <span class="tt-track"><span class="tt-knob" id="themeIcon" aria-hidden="true">☀</span></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── ARTICLE ── -->
+<main class="article">
+  <article class="article-inner">
+    <a class="back-link" href="../index.html#blockchain">← All Blockchain posts</a>
+
+    <div class="post-meta">
+      <span class="post-tag">Blockchain</span>
+      <span>Part 1 of 2 · 4 min read</span>
+    </div>
+    <h1 class="article-title">Decoding WazirX Assets Breach</h1>
+    <p class="article-sub">How $234.9M left WazirX’s multisig hot wallet, starting with the wallet setup and the first public analysis of the attack.</p>
+
+    <img class="article-cover" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FwQ-WuYFfjbo_cDV34AgPA.jpeg" alt="WazirX breach cover image">
+
+    <div class="prose">
+      <p>On 18th July, 2024 7:48 AM UTC, WazirX posted a tweet in their X handle</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*NDh8ZFyUK3Uze_os9osX4w.png" loading="lazy" alt="WazirX's post on X announcing the security breach"></figure>
+      <p>Around $234.9M of funds was moved from WazirX to a new address which raised critical alarm in the company and <a href="https://x.com/CyversAlerts/status/1813834131165286464" target="_blank" rel="noopener">Cyvers Alerts</a> were first to discover and report this issue.</p>
+      <p>Before diving deep into the issue, let’s understand types of wallets:</p>
+      <ul>
+        <li><strong>Hot Wallet</strong> — Hot wallets are connected to the internet and are used for active transactions. They are designed to provide quick access to funds for trading, spending, or transfers.</li>
+        <li><strong>Cold Wallet</strong> — A cold wallet is a cryptocurrency wallet that is not connected to the internet. It is used for long-term storage of digital assets, offering a higher level of security.</li>
+      </ul>
+      <p>The breach occurred in WazirX’s Multisig hot wallet.</p>
+      <div class="callout"><strong>Multisig Wallet</strong> — A multisig (multisignature) wallet is a wallet which requires multiple private keys from multiple authorities to authorize a transaction.</div>
+      <p>WazirX’s wallet was managed using Liminal Digital Assets Custody.</p>
+      <p>Liminal contains 3 main wallets in crypto exchange architecture:</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*374fy-TnpZnogNyo.png" loading="lazy" alt="Liminal's exchange wallet architecture: main, deposit and withdrawal wallets"></figure>
+      <ul>
+        <li><strong>Main Wallet:</strong> The main wallet, often referred to as the primary wallet, is where users store their funds for general use on the exchange.</li>
+        <li><strong>Deposit Wallet:</strong> A deposit wallet is a specific address assigned to a user for receiving cryptocurrency from external sources.</li>
+        <li><strong>Withdrawal Wallet:</strong> A withdrawal wallet is used when a user wants to transfer funds out of the exchange to an external address.</li>
+      </ul>
+      <p>From these 3 wallets, breach occurred in the primary wallet (address: <code>0x27fd43babfbe83a81d14665b1a6fb8030a60c9b4</code>) which had fund of $234+ million.</p>
+      <p>This Multisig wallet had six signatories — five from the WazirX team and one from Liminal, who were responsible for transaction verifications — and a transaction in WazirX typically required approval from three of the WazirX signatories (all of whom used Ledger hardware wallets for security), followed by the final approval from Liminal’s signatory.</p>
+      <figure>
+        <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*aN8j9lK6zrkgRwxi.png" loading="lazy" alt="Sample signing transaction in Liminal">
+        <figcaption>Sample Signing Transaction in Liminal</figcaption>
+      </figure>
+      <p>WazirX explained in a tweet that there was a mismatch between the information displayed on Liminal’s interface and what was actually signed. They suspect that the payload was replaced to transfer wallet control to an attacker.</p>
+
+      <h2>Report by Mudit Gupta (CISO of Polygon Labs)</h2>
+      <p><a href="https://x.com/Mudit__Gupta/status/1813881385800913327" target="_blank" rel="noopener">@Mudit__Gupta</a>, CISO of Polygon Labs tweeted in X (formerly Twitter) that:</p>
+      <blockquote>
+        <p>“Hackers started practicing the hack onchain at least 8 days ago and finally executed it on July 18th, 2024.”</p>
+        <p>“The attackers upgraded the multisig to a malicious version that allowed them to drain the multisig. Since, Draining takes time and multiple transaction. They likely didn’t have access to all the required private keys and were dependent on signature phishing which they can’t do multiple times without getting caught.”</p>
+        <p>“The attackers likely compromised 2 out 4 private keys directly and the remaining two were signature phished via a UI/Wallet compromise. My bet is on wallet compromise/custody provider compromise.”</p>
+        <p>“The wallet tried to do a USDT transfer minutes before the hack started but it failed because two of the four signatures were for upgrading the safe to a malicious contract rather than USDT transfer.”</p>
+        <p>“The two signers were tricked into signing malicious transaction in the name of a normal USDT transfer.”</p>
+        <p>“One of the two phished signatures is actually just a pre-validated signature indicating that the <code>msg.sender</code> authorizes the tx. This account is the co-signer from Liminal Custody, which should check and only then execute the tx but apparently some checks failed. However, hackers got the signatures that they wanted as signatures are submitted publicly in transactions.”</p>
+        <p>“The hackers then used the other two compromised private keys to generate two more signatures and successfully executed the exploit tx to upgrade the multisig to a malicious contract that transfers all funds to them.”</p>
+        <p>“The exact attack paths depend on how the keys were custodied but initial clues point towards a combination of two compromised private keys and malware devices with access to other two keys.”</p>
+      </blockquote>
+      <p>Though this breach was catastrophic, WazirX is doing its best to recover from the disaster and is thoroughly investigating the incident by collaborating with security experts.</p>
+
+      <hr>
+      <p><a href="wazirx-p2.html"><strong>Continue to Part 2 →</strong></a></p>
+    </div>
+  </article>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Mohammed <strong>Aseem</strong> &nbsp;·&nbsp; Security Engineer</div>
+  </div>
+</footer>
+
+<script src="../assets/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Following the WazirX attacker on-chain: Tornado Cash funding, the phishing contract, the signature exploitation sequence, the delegatecall upgrade, and where the stolen assets went.">
+<meta name="author" content="Mohammed Aseem">
+<meta property="og:title" content="Decoding WazirX Assets Breach (Part 2) - Mohammed Aseem">
+<meta property="og:description" content="Following the WazirX attacker on-chain: Tornado Cash funding, the phishing contract, the signature exploitation sequence, the delegatecall upgrade, and where the stolen assets went.">
+<meta property="og:type" content="article">
+<title>Decoding WazirX Assets Breach (Part 2) · Mohammed Aseem</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%230A0A09'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Helvetica,Arial,sans-serif'%20font-size='27'%20font-weight='700'%20letter-spacing='-1'%20fill='%23D8AE3E'%20text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="top">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../index.html">Mohammed <em>Aseem</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../index.html#projects">Projects</a></li>
+      <li><a href="../index.html">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="tt-text" id="themeText">Light</span>
+        <span class="tt-track"><span class="tt-knob" id="themeIcon" aria-hidden="true">☀</span></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── ARTICLE ── -->
+<main class="article">
+  <article class="article-inner">
+    <a class="back-link" href="../index.html#blockchain">← All Blockchain posts</a>
+
+    <div class="post-meta">
+      <span class="post-tag">Blockchain</span>
+      <span>Part 2 of 2 · 7 min read</span>
+    </div>
+    <h1 class="article-title">Decoding WazirX Assets Breach (Part 2)</h1>
+    <p class="article-sub">Following the attacker on-chain: how the multisig’s upgrade mechanism was abused and where the stolen funds went.</p>
+
+    <img class="article-cover" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5kEXapxOqDDLAmis4hLVRg.jpeg" alt="WazirX breach part 2 cover image">
+
+    <div class="prose">
+      <p>The main cause of WazirX asset breach is due to the flaw in the multisig wallet’s contract upgrade mechanism.</p>
+      <p>If you didn’t read the first part, <a href="wazirx-p1.html">click here to read it</a>.</p>
+      <p>The hacker has multiple accounts while performing this attack. Few accounts linked in the attack are:</p>
+      <ol>
+        <li><em>WazirX Exploiter (Primary Account)</em> (Address: <a href="https://etherscan.io/address/0x04b21735e93fa3f8df70e2da89e6922616891a88" target="_blank" rel="noopener"><code>0x04b21735E93Fa3f8df70e2Da89e6922616891a88</code></a>)</li>
+        <li><em>WazirX Exploiter 5</em> (Address: <a href="https://etherscan.io/address/0x6EeDF92Fb92Dd68a270c3205e96DCCc527728066" target="_blank" rel="noopener"><code>0x6EeDF92Fb92Dd68a270c3205e96DCCc527728066</code></a>)</li>
+      </ol>
+      <p><em>WazirX Exploiter 5</em> was funded 0.1 ETH 6 times by Tornado Cash on July 10, 2024 between 6:28 AM UTC and 6:41 AM UTC.</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Hg-DtvvEGtLdAruyaYPL5A.png" loading="lazy" alt="Etherscan list of six 0.1 ETH Tornado Cash transfers into WazirX Exploiter 5"></figure>
+      <p>So, what is Tornado Cash and why did the hacker use it?</p>
+      <div class="callout"><strong>Tornado Cash:</strong> Tornado Cash is a crypto mixer and is used to maintain anonymity in the public blockchain. Initially, users deposit an amount to the Tornado Cash contract. Amount to be deposited is fixed amount like 0.1 ETH, 1 ETH, 10 ETH and 100 ETH. After depositing, they will get a private key note which can be used while withdrawing money. And to withdraw money, you can use different account along with the private key note to maintain anonymity. So, if you deposit money using account A and withdraw using account B, no one will know that account A also belongs to you since there will be multiple transactions with same amount value in that contract.</div>
+      <figure>
+        <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*2sHA60uVtz0ZsZQM5ZEU7A.png" loading="lazy" alt="Depositing ETH in Tornado Cash">
+        <figcaption>Depositing ETH in Tornado</figcaption>
+      </figure>
+      <figure>
+        <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*gOspdoJ7V3mUpBFqKdcl1Q.png" loading="lazy" alt="Sample private key note issued by Tornado Cash">
+        <figcaption>Sample Private Keynote in Tornado</figcaption>
+      </figure>
+      <figure>
+        <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*4YVRXbTQw_XYH2zvO6l7Hw.png" loading="lazy" alt="Withdrawing ETH from Tornado Cash to a different account">
+        <figcaption>Withdraw ETH from Tornado to a different account</figcaption>
+      </figure>
+      <p>So, hacker might have used another account to deposit 0.1 ETH into Tornado Cash long ago and withdrew the ETH using <em>WazirX Exploiter 5</em> on July 10, 2024. This shows that the attack was well planned and prepared long in advance.</p>
+      <figure>
+        <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*OKwSkx7oJYlclhkMqnyLOw.png" loading="lazy" alt="Withdrawal of 0.1 ETH from Tornado Cash to WazirX Exploiter 5">
+        <figcaption>Withdrawal of 0.1 ETH from Tornado Cash to WazirX Exploiter 5</figcaption>
+      </figure>
+      <p>On the same day, July 10th at 7:37 AM UTC, <em>WazirX Exploiter 5</em> deployed a malicious <a href="https://etherscan.io/address/0xef279c2ab14960aa319008cbea384b9f8ac35fc6" target="_blank" rel="noopener">smart contract (0xEf279….35fC6)</a> to launch the phishing attack and steal the private keys.</p>
+      <figure>
+        <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*BlInfEvdSl9Zi6AsszRo6w.png" loading="lazy" alt="Contract deployment data for the phishing contract">
+        <figcaption>Data of contract deployment</figcaption>
+      </figure>
+      <p>And at 7:49 AM UTC, he performed test transactions using SHIB in <em>WazirX Exploiter 5</em> from a multisig <code>0x09B33E75E51Ae9A30EcA4B65Db76E511199af664</code>.</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*DJz9NGKI_p08cUpnZW0kVQ.png" loading="lazy" alt="Test SHIB transactions from the attacker's multisig"></figure>
+      <p>@zachxbt tweeted in X that he was able to demix and find 6 × 0.1 ETH matching deposits made the day before from 0xc68. He tweeted that demix is accurate as 0xc68 was also doing tests with 0x304 multisig on July 9th with SHIB.</p>
+      <p>Anyhow, they required the private keys of three WazirX signatories and one Liminal signatory to perform exploitation.</p>
+
+      <h2>The signature exploitation sequence</h2>
+      <p>Liminal explained on their blog on WazirX incident about the signature exploitation sequences:</p>
+      <ol>
+        <li>When Liminal received first GALA transaction with the victim 1 (Here, victim refers to WazirX signatories), Liminal rejected the transaction due to signature mismatch. However, the moment the user sent the signed transaction to Liminal for approval, the signature was already exposed to the attackers owing to the victim’s compromised machine. It is evident that the attacker compromised the machine, and they were able to change the payload using a sophisticated MITM attack or similar client side compromise. A forensic analysis of the victim’s signer machines will likely uncover more details and help address the root cause of this issue.</li>
+        <li>Since victim 1 wasn’t able to create GALA transaction, victim 2 created the GALA transaction and Liminal rejected it once again due to tx data mismatch. Assumption is that, the attacker has compromised the machine, which explains the mismatch in payload emerging from the transactions generated by victim 2 as well. This is likely to have been executed using a sophisticated MITM attack or similar client side compromise.<br><br>Still the method hacker used to obtain first two signatures is unknown.</li>
+        <li>Then, victim 1 created a legitimate USDT transaction with 2 valid signatures. This transaction was crafted to look legitimate but was designed to fail. Main motive of collecting first two signatures is to upgrade the multisig to a malicious contract rather than for the USDT transfer itself. When victim 3 tried to approve the transaction, his machine was also compromised due to the injected payload by the hacker and got the third signature he wanted.<br>(Failed TX hash: <a href="https://etherscan.io/tx/0x8b99ae634e1e7180b3fcc66e8fe5d076351477077051a7bbf5ec626a9d0588ef" target="_blank" rel="noopener"><code>0x8b99ae63…0588ef</code></a>)</li>
+        <li>The final malicious transaction was crafted in such a way that the fields used to verify policies were using legit transaction details and had valid signatures. So, Liminal signed the transaction which resulted in compromise of all four required signatures of the multisig wallet.</li>
+      </ol>
+      <figure>
+        <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*4n2tjsSmnkBVLf3caOVzUA.png" loading="lazy" alt="Etherscan view of the failed USDT transaction">
+        <figcaption>Failed Transaction</figcaption>
+      </figure>
+
+      <h2>The delegatecall upgrade</h2>
+      <p>Then, to facilitate the attack, hacker executed a delegate call from the multisig wallet, pointing to their malicious contract.</p>
+      <div class="callout"><strong>delegatecall():</strong> <code>delegatecall</code> allows a contract to execute code from another contract while keeping the calling contract’s storage, <code>msg.sender</code>, and <code>msg.value</code> unchanged. The code of the target contract runs in the context of the calling contract, meaning any state changes affect the calling contract.</div>
+      <p>This call altered the slot0 of the multisig proxy to the phishing contract address. The delegate call data is:</p>
+      <pre><code>0x804e1f0a000000000000000000000000ef279c2ab14960aa319008cbea384b9f8ac35fc6</code></pre>
+      <p>The first 4 bytes, <code>0x804e1f0a</code>, correspond to the function selector of the target contract’s (multisig wallet) function that the delegate call is invoking.</p>
+      <p>The remaining bytes, <code>000000000000000000000000ef279c2ab14960aa319008cbea384b9f8ac35fc6</code>, represent the parameter(s) passed to the function. In this case, the parameter is an address <code>0xef279c2ab14960aa319008cbea384b9f8ac35fc6</code> (Phishing contract).</p>
+      <p>So, whenever a phishing contract calls a function in a multisig wallet, the multisig wallet will run the function on the phishing contract’s address (since <code>msg.sender</code> = 0xef2….5fc6).</p>
+      <p>From this point forward, every transaction to the Safe Multisig redirected a delegate call to the new malicious phishing contract address. This allowed the attackers to continuously transfer funds from the WazirX multisig wallet to their <em>WazirX Exploiter</em> Account.</p>
+      <p>Here is the <a href="https://openchain.xyz/trace/ethereum/0x1e523051a8a481c5a57fe8261cced4cb3e775ce9315168b041fd34fc25d563ac" target="_blank" rel="noopener">call trace</a>.</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*WEAtFQSITOdREuRxvXNr9Q.png" loading="lazy" alt="Call trace of the exploit transaction"></figure>
+      <p>Later after exploitation, Hacker sent <em>I Hacked WazirX</em> Token to Vitalik Buterin (Developer of Ethereum).</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EhjI80Ua1CUw_YrvGTKy-A.png" loading="lazy" alt="Transfer of the 'I Hacked WazirX' token to Vitalik Buterin's address"></figure>
+
+      <h2>Total assets stolen by the hackers</h2>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Y6dRFlHAxQl4Ch-scevyug.jpeg" loading="lazy" alt="Breakdown of the assets stolen from WazirX"></figure>
+      <p>After stealing, hacker converted $150 million of ERC-20 tokens to Ether to avoid getting funds frozen.</p>
+      <div class="callout"><strong>Crypto Freezing:</strong> Cryptocurrency freezes are funds that are currently unavailable or temporarily blocked. If exchanges or financial platforms suspect fraud or money laundering, they can freeze the funds in the account.</div>
+      <p><a href="https://platform.spotonchain.com/en/signal-details/the-wazirx-attacker-now-holds-59097-eth-201m-146755" target="_blank" rel="noopener">Spotonchain</a> tweeted in X that,</p>
+      <blockquote>
+        <p>“The total ETH holding of the WazirX attacker has risen to <strong>59,097 ETH ($201M)</strong>!</p>
+        <ol>
+          <li>15,298 ETH ($52M) was stolen directly from the exchange;</li>
+          <li>43,799 ETH ($149M) was acquired by dumping various assets, notably including:
+            <ul>
+              <li>5.43T SHIB ($101M at the time of the hack) has been sold for 26,535 ETH at an average price of $0.00001693 ($92M);</li>
+              <li>20.5M MATIC ($11.3M at the time of the hack) has been sold for 2,968 ETH at an average price of $0.499 ($10.2M);</li>
+              <li>640.27B PEPE ($7.58M at the time of the hack) has been sold for 2,170 ETH at an average price of $0.00001168 ($7.48M).”</li>
+            </ul>
+          </li>
+        </ol>
+      </blockquote>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*TmDVU5fP8bINlxtqdbQDyw.png" loading="lazy" alt="Spotonchain summary of the attacker's ETH holdings"></figure>
+
+      <h2>Security measures taken</h2>
+      <h3>1. WazirX</h3>
+      <p>WazirX is actively working to locate and recover the stolen funds, and to ensure the safety of the assets, INR and crypto withdrawals have been temporarily paused.</p>
+      <p><a href="https://x.com/WazirXIndia/status/1813843289940058446" target="_blank" rel="noopener">x.com/WazirXIndia/status/1813843289940058446</a></p>
+      <h3>2. Liminal</h3>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1162/format:webp/1*J872pqGI7S5R7NSyymOV1w.png" loading="lazy" alt="Liminal's statement on the WazirX incident"></figure>
+      <p><a href="https://x.com/liminalcustody/status/1814280472614383819" target="_blank" rel="noopener">x.com/liminalcustody/status/1814280472614383819</a></p>
+
+      <hr>
+      <p><a href="wazirx-p1.html"><strong>← Back to Part 1</strong></a></p>
+    </div>
+  </article>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Mohammed <strong>Aseem</strong> &nbsp;·&nbsp; Security Engineer</div>
+  </div>
+</footer>
+
+<script src="../assets/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="What actually happens on the wire during Nmap TCP, SYN and UDP port scans, explained for beginners with basic networking knowledge.">
+<meta name="author" content="Mohammed Aseem">
+<meta property="og:title" content="NMAP Port Scanning Deep Dive - Mohammed Aseem">
+<meta property="og:description" content="What actually happens on the wire during Nmap TCP, SYN and UDP port scans, explained for beginners with basic networking knowledge.">
+<meta property="og:type" content="article">
+<title>NMAP Port Scanning Deep Dive · Mohammed Aseem</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%230A0A09'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Helvetica,Arial,sans-serif'%20font-size='27'%20font-weight='700'%20letter-spacing='-1'%20fill='%23D8AE3E'%20text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="top">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../index.html">Mohammed <em>Aseem</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../index.html#projects">Projects</a></li>
+      <li><a href="../index.html">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="tt-text" id="themeText">Light</span>
+        <span class="tt-track"><span class="tt-knob" id="themeIcon" aria-hidden="true">☀</span></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── ARTICLE ── -->
+<main class="article">
+  <article class="article-inner">
+    <a class="back-link" href="../index.html#tools">← All Tools posts</a>
+
+    <div class="post-meta">
+      <span class="post-tag">Tools</span>
+      <span>3 min read</span>
+    </div>
+    <h1 class="article-title">NMAP Port Scanning Deep Dive</h1>
+    <p class="article-sub">What actually happens behind the scenes when Nmap reports a port as open, closed or filtered.</p>
+
+    <img class="article-cover" src="https://miro.medium.com/v2/resize:fit:1080/format:webp/0*zq6uXzixI0f-_Rgn.jpg" alt="Nmap port scanning cover image">
+
+    <div class="prose">
+      <p>I have been using Nmap for Vulnerability Disclosure Programs and CTFs, only considering the final output and never bothering about the underlying workings. However, I have a strong desire to break down the abstractions and learn about what goes on behind the scenes.</p>
+      <p>So, I learnt about behind the scenes working of Nmap port scanning and simplified it in my blog so that even beginners with basic networking knowledge can understand.</p>
+      <p>Nmap is used to scan the ports and find whether the ports are open | closed | filtered. Nmap can be also used for host discovery, OS and Versions detection. But, in this blog, we will be focusing only about Port Scanning.</p>
+      <p>Nmap has many command-line switches for scanning the ports. Most commonly used three switches for port scanning are</p>
+      <ol>
+        <li><code>-sT</code> : TCP scans</li>
+        <li><code>-sS</code> : SYN scans</li>
+        <li><code>-sU</code> : UDP scans</li>
+      </ol>
+      <pre><code>nmap -sT &lt;ip address&gt; # TCP Scan
+nmap -sS &lt;ip address&gt; # SYN Scan
+nmap -sU &lt;ip address&gt; # UDP Scan</code></pre>
+
+      <h2>TCP Scan (-sT)</h2>
+      <p>Transmission Control Protocol (TCP) is <em>connection-oriented</em> protocol. It performs three-way handshake to establish a connection with the target server. Switch used for TCP Scan in Nmap is <strong>-sT</strong>.</p>
+      <p>If Nmap sends TCP request with <em>SYN flag</em> to an open port, the target server responds with <em>ACK/SYN flag</em> to the terminal and our terminal responds to the server with the <em>ACK flag</em>. After connecting to the desired port, NMAP establishes that the port is <strong><em>open.</em></strong></p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5wZlxCnVAY1BrAfT6VZb3A.png" loading="lazy" alt="TCP scan against an open port: SYN, SYN/ACK, ACK"></figure>
+      <p>If Nmap sends a <em>TCP SYN flag</em> to a <strong><em>closed</em></strong> port, the target server will respond with the <em>RST flag</em> and Nmap will establish that the port is <strong><em>closed</em></strong>.</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:746/format:webp/1*WqXYLiIRPB6sOUBgGawMlg.png" loading="lazy" alt="TCP scan against a closed port: SYN answered with RST"></figure>
+      <p>There is an another condition where the Nmap results shows that the port is <strong><em>filtered</em></strong>. This happens when the port is behind a firewall. Nmap sends the <em>TCP SYN flag</em> and firewall <em>drops</em> it. Nmap doesn’t receive any response from the target and establish the port as <strong><em>filtered</em></strong>.</p>
+
+      <h2>SYN Scan (-sS)</h2>
+      <p>Synchronize (SYN) Scan works similar to TCP Scan but with slight differences. SYN Scan is also referred to as <em>“Half-open scan”</em> or <em>“Stealth Scan”</em>. Switch used for SYN Scan is <strong>-sS</strong>.</p>
+      <p>In case of <strong><em>opened</em></strong> ports, initially, Nmap sends the <em>TCP SYN flag</em> to the target like a normal three-way handshake. But once it receives the <em>ACK/SYN flag</em> from the target, client sends the <em>RST flag</em> to the target than sending the <em>ACK flag.</em></p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:696/format:webp/1*TeV9qfosfAW4QPlSxnPMPQ.png" loading="lazy" alt="SYN scan against an open port: SYN, SYN/ACK, then RST instead of ACK"></figure>
+      <p>Since the connection is not established in this case due to incompletion of three-way handshake, SYN Scans are <em>not logged</em> by the applications.</p>
+      <p>In case of scanning a <strong><em>closed</em></strong> or <strong><em>filtered</em></strong> ports, SYN Scan is similar to TCP Scan. Closed ports sends the <em>RST flag</em> and if port is filtered by firewall, then firewall drops the incoming <em>TCP SYN packet</em>.</p>
+
+      <h2>UDP Scan (-sU)</h2>
+      <p>User Datagram Protocol (UDP) is a <em>connectionless</em> protocol. UDP Scan doesn’t perform any three-way handshakes to establish any connection. Switch used for Nmap UDP Scan is <strong>-sU</strong>.</p>
+      <p>Nmap sends the UDP packet to the target server and there will be no response from the target. Nmap refers the port as <strong><em>open | filtered</em></strong> for this sequence.</p>
+      <p>When the port is <strong><em>closed</em></strong>, target responds with ICMP(ping) packet containing a message <em>“Port is Unreachable”</em>.</p>
+      <figure><img src="https://miro.medium.com/v2/resize:fit:1364/format:webp/1*P8Yj0aIHVu9LLzg8RJ2apg.png" loading="lazy" alt="UDP scan: no reply for open or filtered ports, ICMP port unreachable for closed ports"></figure>
+
+      <hr>
+      <p>To wrap up, Nmap is truly a fantastic tool for anyone who wants to dive deep into network mapping and port scanning. I hope you might get an idea what would have happened in background when you get Nmap results after scanning a port.</p>
+    </div>
+  </article>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Mohammed <strong>Aseem</strong> &nbsp;·&nbsp; Security Engineer</div>
+  </div>
+</footer>
+
+<script src="../assets/blog.js"></script>
+</body>
+</html>

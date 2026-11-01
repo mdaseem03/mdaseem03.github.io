@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Writing by Mohammed Aseem on security tools, application security, AI security, blockchain and security basics.">
+<meta name="author" content="Mohammed Aseem">
+<meta property="og:title" content="Blog - Mohammed Aseem">
+<meta property="og:type" content="website">
+<title>Blog · Mohammed Aseem</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%230A0A09'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Helvetica,Arial,sans-serif'%20font-size='27'%20font-weight='700'%20letter-spacing='-1'%20fill='%23D8AE3E'%20text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="assets/blog.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="top">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">Mohammed <em>Aseem</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="index.html">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="tt-text" id="themeText">Light</span>
+        <span class="tt-track"><span class="tt-knob" id="themeIcon" aria-hidden="true">☀</span></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="blog-hero">
+  <div class="blog-hero-inner">
+    <p class="eyebrow">Blog</p>
+    <h1 class="blog-title">Notes from the <em>field</em></h1>
+    <p class="blog-lead">Write-ups on security tooling, application and AI security, blockchain, and the fundamentals underneath them.</p>
+  </div>
+</header>
+
+<!-- ── POSTS ── -->
+<section id="posts">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">Categories</div>
+    <div class="sec-body">
+      <div class="cat-filter" id="catFilter" role="group" aria-label="Filter posts by category">
+        <button class="cat-btn" type="button" data-cat="all" aria-pressed="true">All <span class="cat-count"></span></button>
+        <button class="cat-btn" type="button" data-cat="tools" aria-pressed="false">Tools <span class="cat-count"></span></button>
+        <button class="cat-btn" type="button" data-cat="application-security" aria-pressed="false">Application Security <span class="cat-count"></span></button>
+        <button class="cat-btn" type="button" data-cat="ai-security" aria-pressed="false">AI Security <span class="cat-count"></span></button>
+        <button class="cat-btn" type="button" data-cat="blockchain" aria-pressed="false">Blockchain <span class="cat-count"></span></button>
+        <button class="cat-btn" type="button" data-cat="basics" aria-pressed="false">Basics <span class="cat-count"></span></button>
+      </div>
+
+      <div class="post-grid">
+        <a class="post-card" data-category="blockchain" href="blockchain/wazirx-p2.html">
+          <img class="post-cover" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5kEXapxOqDDLAmis4hLVRg.jpeg" loading="lazy" alt="">
+          <div class="post-body">
+            <div class="post-meta"><span class="post-tag">Blockchain</span><span>Part 2 · 7 min read</span></div>
+            <h2 class="post-title">Decoding WazirX Assets Breach (Part 2)</h2>
+            <p class="post-excerpt">Following the attacker on-chain: Tornado Cash funding, the phishing contract, the delegatecall upgrade, and where $230M+ ended up.</p>
+            <span class="post-more">Read post →</span>
+          </div>
+        </a>
+
+        <a class="post-card" data-category="blockchain" href="blockchain/wazirx-p1.html">
+          <img class="post-cover" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FwQ-WuYFfjbo_cDV34AgPA.jpeg" loading="lazy" alt="">
+          <div class="post-body">
+            <div class="post-meta"><span class="post-tag">Blockchain</span><span>Part 1 · 4 min read</span></div>
+            <h2 class="post-title">Decoding WazirX Assets Breach</h2>
+            <p class="post-excerpt">How $234.9M was drained from WazirX’s Liminal-managed multisig hot wallet, and what the first on-chain analysis revealed.</p>
+            <span class="post-more">Read post →</span>
+          </div>
+        </a>
+
+        <a class="post-card" data-category="tools" href="tools/nmap.html">
+          <img class="post-cover" src="https://miro.medium.com/v2/resize:fit:1080/format:webp/0*zq6uXzixI0f-_Rgn.jpg" loading="lazy" alt="">
+          <div class="post-body">
+            <div class="post-meta"><span class="post-tag">Tools</span><span>3 min read</span></div>
+            <h2 class="post-title">NMAP Port Scanning Deep Dive</h2>
+            <p class="post-excerpt">What actually happens on the wire during TCP, SYN and UDP scans, and how Nmap decides a port is open, closed or filtered.</p>
+            <span class="post-more">Read post →</span>
+          </div>
+        </a>
+
+        <a class="post-card" data-category="basics" href="basics/linux-kernel-distros-filesystems.html">
+          <img class="post-cover" src="https://blogger.googleusercontent.com/img/a/AVvXsEiG0Bum1oAbye__XpVDHBgvQKLYcLk9VZz9x7HUHgohAd0uNUcTgwhEyJdNSXxKPRnMil13cf96Dwm6xjKXJo9xYn70mTmpc-D_qJGuxsbpRSkQRExlmz2eDwFmQoQusrlZ6nJAvjFFwwKbTKsHF3NFNnqQubUkos7chEpC2Z3SG6yZSPj-LdtMhJQo" loading="lazy" alt="">
+          <div class="post-body">
+            <div class="post-meta"><span class="post-tag">Basics</span><span>4 min read</span></div>
+            <h2 class="post-title">Understanding Kernel, Distros and File Systems in Linux</h2>
+            <p class="post-excerpt">Is Linux an OS or a kernel? What a kernel does, where distros come from, and what lives in each Linux directory.</p>
+            <span class="post-more">Read post →</span>
+          </div>
+        </a>
+
+        <!--
+          Add one card per post. Set data-category to one of:
+          tools · application-security · ai-security · blockchain · basics
+          and point href at the post inside that category's folder.
+
+        <a class="post-card" data-category="tools" href="tools/your-post-slug.html">
+          <img class="post-cover" src="tools/your-post-slug-cover.jpg" width="1920" height="1080" loading="lazy" alt="">
+          <div class="post-body">
+            <div class="post-meta"><span class="post-tag">Tools</span><span>1 Jan 2027 · 6 min read</span></div>
+            <h2 class="post-title">Post title</h2>
+            <p class="post-excerpt">One or two sentences that sum up the post.</p>
+            <span class="post-more">Read post →</span>
+          </div>
+        </a>
+        -->
+      </div>
+
+      <div class="empty-state" id="emptyState" hidden>No posts yet<span id="emptyCat"></span>. Check back soon.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Mohammed <strong>Aseem</strong> &nbsp;·&nbsp; Security Engineer</div>
+  </div>
+</footer>
+
+<script src="assets/blog.js"></script>
+</body>
+</html>

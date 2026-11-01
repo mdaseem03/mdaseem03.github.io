@@ -1,0 +1,92 @@
+<!doctype html>
+<!--
+  Post template. To publish a post:
+  1. Copy this file into the matching category folder, e.g. blogs/ai-security/my-post.html
+     (the ../ paths below already work from there).
+  2. Fill in the title, meta tags, category tag, date and the article body.
+  3. Add a card for it in blogs/index.html.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="One-sentence summary of the post.">
+<meta name="author" content="Mohammed Aseem">
+<meta property="og:title" content="Post title - Mohammed Aseem">
+<meta property="og:description" content="One-sentence summary of the post.">
+<meta property="og:type" content="article">
+<title>Post title · Mohammed Aseem</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%230A0A09'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Helvetica,Arial,sans-serif'%20font-size='27'%20font-weight='700'%20letter-spacing='-1'%20fill='%23D8AE3E'%20text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="top">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../index.html">Mohammed <em>Aseem</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../index.html#projects">Projects</a></li>
+      <li><a href="../index.html">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="tt-text" id="themeText">Light</span>
+        <span class="tt-track"><span class="tt-knob" id="themeIcon" aria-hidden="true">☀</span></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── ARTICLE ── -->
+<main class="article">
+  <article class="article-inner">
+    <!-- Point the back link at this post's category: ../index.html#tools, #application-security, #ai-security, #blockchain or #basics -->
+    <a class="back-link" href="../index.html#tools">← All Tools posts</a>
+
+    <div class="post-meta">
+      <span class="post-tag">Tools</span>
+      <span>1 Jan 2027 · 6 min read</span>
+    </div>
+    <h1 class="article-title">Post title</h1>
+    <p class="article-sub">A one- or two-sentence standfirst that tells the reader what they will get from the post.</p>
+
+    <!-- Optional cover image, kept next to the post in its category folder -->
+    <!-- <img class="article-cover" src="your-post-slug-cover.jpg" width="1920" height="1080" alt="Describe the image"> -->
+
+    <div class="prose">
+      <p>Opening paragraph. Set up the problem and why it matters.</p>
+
+      <h2>Section heading</h2>
+      <p>Body text with <strong>bold</strong>, <a href="#">a link</a> and <code>inline code</code>.</p>
+      <ul>
+        <li>List item</li>
+        <li>List item</li>
+      </ul>
+
+      <h3>Sub-heading</h3>
+      <pre><code>$ example command --flag value</code></pre>
+
+      <div class="callout"><strong>Note:</strong> Use callouts for warnings, prerequisites or key takeaways.</div>
+
+      <blockquote>Pull quotes or cited text go here.</blockquote>
+
+      <hr>
+      <p>Closing paragraph and any references.</p>
+    </div>
+  </article>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Mohammed <strong>Aseem</strong> &nbsp;·&nbsp; Security Engineer</div>
+  </div>
+</footer>
+
+<script src="../assets/blog.js"></script>
+</body>
+</html>
