@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Portfolio of Mohammed Aseem - security engineer working across application security, AI Security, and security architecture.">
+<meta name="author" content="Mohammed Aseem">
+<meta property="og:title" content="Mohammed Aseem - Security Engineer">
+<meta property="og:description" content="Portfolio of Mohammed Aseem - security engineer working across application security, AI Security, and security architecture.">
+<meta property="og:type" content="website">
+<title>Mohammed Aseem</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%230A0A09'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Helvetica,Arial,sans-serif'%20font-size='27'%20font-weight='700'%20letter-spacing='-1'%20fill='%23D8AE3E'%20text-anchor='middle'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+
+<style>
+/* Layout: sticky nav, sectioned page, mono-less grid of label + content; one type family throughout */
+:root {
+  /* light — neutrals carry a warm bias toward the gold so the palette reads as one family */
+  --bg:        #FFFFFF;
+  --fg:        #0B0A08;
+  --surface:   #FAF8F3;
+  --surface-2: #F1ECE1;
+  --border:    #E4DECF;
+  --muted:     #6B6558;
+  --gold:      #B4871F;  /* brand gold — display words, rules, borders */
+  --gold-ink:  #8A6512;  /* accessible gold — small text, labels */
+  --on-gold:   #FFFFFF;
+  --shadow:    0 22px 48px -20px rgba(70, 50, 10, 0.30), 0 2px 8px rgba(70, 50, 10, 0.06);
+  --font:      'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #0A0A09;
+    --fg:        #F2EFE8;
+    --surface:   #141311;
+    --surface-2: #1C1A16;
+    --border:    #2B2823;
+    --muted:     #938C7E;
+    --gold:      #D8AE3E;
+    --gold-ink:  #DDB74F;
+    --on-gold:   #0A0A09;
+    --shadow:    0 24px 52px -18px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #0A0A09;
+  --fg:        #F2EFE8;
+  --surface:   #141311;
+  --surface-2: #1C1A16;
+  --border:    #2B2823;
+  --muted:     #938C7E;
+  --gold:      #D8AE3E;
+  --gold-ink:  #DDB74F;
+  --on-gold:   #0A0A09;
+  --shadow:    0 24px 52px -18px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font-family: var(--font); }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 200;
+  background: var(--bg);
+}
+
+.gold { color: var(--gold-ink); font-weight: 500; }
+
+/* shared small-caps label treatment — same family, different size/colour */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  gap: 12px;
+}
+.nav-brand {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand em { font-style: normal; color: var(--gold-ink); }
+.nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--gold-ink); }
+.nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* ── THEME SWITCH ── */
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tt-text {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.theme-toggle:hover .tt-text { color: var(--gold-ink); }
+.tt-track {
+  position: relative;
+  width: 52px;
+  height: 26px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  transition: border-color 0.15s;
+}
+.theme-toggle:hover .tt-track { border-color: var(--gold); }
+.tt-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--on-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+:root[data-theme="dark"] .tt-knob { transform: translateX(26px); }
+.theme-toggle:focus-visible .tt-track,
+.menu-btn:focus-visible,
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 6px;
+  font-size: 19px;
+  line-height: 1;
+}
+
+/* ── HERO ── */
+.hero {
+  border-bottom: 1px solid var(--border);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 84px 64px;
+}
+.hero-inner { max-width: 1120px; margin: 0 auto; }
+.hero-eyebrow { color: var(--gold-ink); margin-bottom: 20px; }
+.hero-name {
+  font-size: clamp(46px, 8.2vw, 88px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--fg);
+  text-wrap: balance;
+  margin-bottom: 22px;
+}
+.hero-name em { font-style: normal; color: var(--gold); }
+.hero-subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 34px;
+  max-width: 60ch;
+}
+.hero-subtitle strong { font-weight: 500; color: var(--gold-ink); }
+.hero-contacts { display: flex; flex-wrap: wrap; gap: 10px 32px; }
+.contact-item { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+.contact-item .mark { color: var(--gold); display: inline-flex; }
+.contact-item .logo { width: 18px; height: 18px; display: block; }
+.contact-val { color: var(--fg); font-weight: 500; text-decoration: none; }
+a.contact-val:hover { color: var(--gold-ink); }
+
+/* ── SECTIONS ── */
+section {
+  border-bottom: 1px solid var(--border);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 58px;
+}
+.sec-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 28px 48px;
+  align-items: start;
+}
+.sec-label {
+  color: var(--gold-ink);
+  padding-top: 5px;
+  position: sticky;
+  top: calc(60px + env(safe-area-inset-top, 0px) + 18px);
+}
+.sec-body { min-width: 0; }
+
+/* ── ABOUT ── */
+.about-text { font-size: 16px; line-height: 1.82; max-width: 68ch; font-weight: 300; }
+
+/* ── EXPERIENCE — vertical track, one point per role ── */
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 30px;
+}
+.exp-list::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  bottom: 14px;
+  width: 1px;
+  background: var(--border);
+}
+.exp-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 24px;
+  align-items: start;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-row::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 34px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.exp-row:first-child { padding-top: 0; }
+.exp-row:first-child::before { top: 8px; }
+.exp-row:last-child { border-bottom: none; padding-bottom: 0; }
+.exp-role {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--gold);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.exp-company { font-size: 13.5px; font-weight: 500; color: var(--fg); margin-top: 6px; }
+.exp-company span { color: var(--muted); font-weight: 400; }
+.exp-date {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  text-align: right;
+  padding-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── RESEARCH ── */
+.research-lead { font-size: 15.5px; font-weight: 300; line-height: 1.8; max-width: 62ch; margin-bottom: 24px; }
+.research-items { display: flex; flex-direction: column; position: relative; padding-left: 30px; }
+.research-items::before { content: ""; position: absolute; left: 4px; top: 10px; bottom: 14px; width: 1px; background: var(--border); }
+.research-item { position: relative; padding: 22px 0; border-bottom: 1px solid var(--border); }
+.research-item::before { content: ""; position: absolute; left: -30px; top: 30px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--bg); }
+.research-item:first-child { padding-top: 0; }
+.research-item:first-child::before { top: 8px; }
+.research-item:last-child { border-bottom: none; padding-bottom: 0; }
+.research-text { font-size: 14.5px; font-weight: 300; line-height: 1.7; }
+
+/* ── PROJECTS — floating panels in a sideways carousel, arrows overlaid on the edges ── */
+.proj-carousel { position: relative; }
+.proj-list {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 6px 40px;
+  scroll-padding-inline: 6px;
+  cursor: grab;
+}
+.proj-list::-webkit-scrollbar { display: none; }
+.proj-list.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
+.proj-list img { -webkit-user-drag: none; user-select: none; }
+.proj-row {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.proj-row:hover { transform: translateY(-4px); border-color: var(--gold); }
+.proj-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000000;
+  border-bottom: 1px solid var(--border);
+}
+.proj-row .proj-info { padding: 24px 26px 28px; }
+.proj-arrow {
+  position: absolute;
+  top: calc(10px + (100% - 50px) / 2);
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  box-shadow: var(--shadow);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.proj-arrow:hover { background: var(--gold); color: var(--on-gold); }
+.proj-arrow:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.proj-arrow[disabled] { opacity: 0; pointer-events: none; }
+.proj-arrow.prev { left: -16px; }
+.proj-arrow.next { right: -16px; }
+.proj-info { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.proj-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.proj-name {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+  line-height: 1.15;
+}
+.proj-tagline {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.proj-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  border: 1px solid var(--gold);
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+.proj-desc { font-size: 14.5px; font-weight: 300; color: var(--muted); line-height: 1.72; max-width: 72ch; }
+.proj-link {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--gold-ink);
+  text-decoration: none;
+  align-self: flex-start;
+}
+.proj-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ── SKILLS ── */
+.skills-grid { display: flex; flex-direction: column; gap: 22px; }
+.skill-grp-title { color: var(--gold-ink); margin-bottom: 11px; font-size: 10.5px; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px 8px; }
+.tag {
+  font-size: 12.5px;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+}
+
+/* ── CERTS — same floating panels as projects ── */
+.cert-name { font-size: 18px; font-weight: 600; color: var(--gold); letter-spacing: -0.01em; }
+.cert-issuer { font-size: 12.5px; color: var(--muted); }
+.proj-row .cert-info { gap: 6px; }
+
+/* ── FOOTER ── */
+footer {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 38px;
+}
+.footer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-text { font-size: 13px; color: var(--muted); }
+.footer-text strong { color: var(--gold-ink); font-weight: 600; }
+.footer-accent { color: var(--gold-ink); font-size: 10.5px; }
+
+/* ── MOBILE ── */
+@media (max-width: 720px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px max(16px, env(safe-area-inset-left, 0px));
+    gap: 15px;
+    z-index: 99;
+  }
+  .nav-links.is-open { display: flex; }
+  .menu-btn { display: block; }
+  .tt-text { display: none; }
+
+  .hero { padding-block: 56px 48px; }
+  section { padding-block: 46px; }
+  .sec-inner { grid-template-columns: 1fr; gap: 16px; }
+  .sec-label { position: static; }
+  .exp-list, .research-items { padding-left: 24px; }
+  .research-item::before { left: -24px; top: 26px; }
+  .research-item:first-child::before { top: 6px; }
+  .exp-row { grid-template-columns: 1fr; gap: 6px; }
+  .exp-row::before { left: -24px; top: 30px; }
+  .exp-row:first-child::before { top: 6px; }
+  .exp-date { text-align: left; padding-top: 2px; }
+  .proj-row .proj-info { padding: 20px 18px 22px; }
+  .proj-arrow { width: 40px; height: 40px; font-size: 18px; }
+  .proj-arrow.prev { left: 4px; }
+  .proj-arrow.next { right: 4px; }
+}
+
+@media (max-width: 420px) {
+  .nav-brand { font-size: 13.5px; }
+  .proj-name { font-size: 22px; }
+  .exp-role { font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .proj-list { scroll-behavior: auto; }
+  .proj-row:hover { transform: none; }
+}
+
+/* base — supplied by the artifact host, declared here for the standalone page */
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+html { scroll-padding-top: calc(60px + env(safe-area-inset-top, 0px) + 12px); }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<!-- ── NAV ── -->
+<nav id="top">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">Mohammed <em>Aseem</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+        <span class="tt-text" id="themeText">Light</span>
+        <span class="tt-track"><span class="tt-knob" id="themeIcon" aria-hidden="true">☀</span></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow hero-eyebrow">Security Engineer</p>
+    <h1 class="hero-name">Mohammed <em>Aseem</em></h1>
+    <p class="hero-subtitle"><strong>Product Security</strong> &nbsp;·&nbsp; <strong>AI Security</strong> &nbsp;·&nbsp; <strong>Security Architecture</strong></p>
+    <div class="hero-contacts">
+      <div class="contact-item">
+        <span class="mark"><svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M3 7l9 6.5L21 7"/></svg></span>
+        <span class="contact-val">mdaseem03@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="mark"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="currentColor"/><rect x="4.5" y="9.5" width="3" height="10" fill="var(--bg)"/><circle cx="6" cy="6" r="1.8" fill="var(--bg)"/><path fill="var(--bg)" d="M10 9.5h2.9v1.4c.5-.9 1.600-1.600 3.100-1.600 3 0 3.500 2 3.500 4.400v5.800h-3v-5.100c0-1.200 0-2.700-1.700-2.700s-1.800 1.300-1.800 2.600v5.200h-3z"/></svg></span>
+        <a class="contact-val" href="https://www.linkedin.com/in/mdaseem03/" target="_blank" rel="noopener">linkedin.com/in/mdaseem03 ↗</a>
+      </div>
+      <div class="contact-item">
+        <span class="mark"><svg class="logo" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></span>
+        <a class="contact-val" href="https://github.com/mdaseem03" target="_blank" rel="noopener">github.com/mdaseem03 ↗</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">About</div>
+    <div class="sec-body">
+      <p class="about-text">Security engineer with <span class="gold">2+ years</span> of hands-on experience across <span class="gold">Product Security</span>, <span class="gold">AI Security</span>, and <span class="gold">Security Architecture</span>. Identified <span class="gold">critical vulnerabilities</span> in Web, API, AI, and Cloud environments through Manual Penetration Testing, Threat Modelling, and Red Team Exercises. Experienced partnering with engineering, GRC, and leadership teams to improve security visibility and integrate security into the SDLC, aligned with <span class="gold">OWASP Top 10</span>, <span class="gold">MITRE ATLAS</span>, and <span class="gold">NIST CSF</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">Experience</div>
+    <div class="sec-body">
+      <div class="exp-list">
+        <div class="exp-row">
+          <div>
+            <div class="exp-role">Cyber Security Engineer II</div>
+            <div class="exp-company">HighRadius Technology <span>— Hyderabad, India</span></div>
+          </div>
+          <div class="exp-date">Jul 2026 — Present</div>
+        </div>
+        <div class="exp-row">
+          <div>
+            <div class="exp-role">Cyber Security Engineer I</div>
+            <div class="exp-company">HighRadius Technology <span>— Hyderabad, India</span></div>
+          </div>
+          <div class="exp-date">May 2025 — Jul 2026</div>
+        </div>
+        <div class="exp-row">
+          <div>
+            <div class="exp-role">Product Security Intern</div>
+            <div class="exp-company">HighRadius Technology <span>— Remote</span></div>
+          </div>
+          <div class="exp-date">Sep 2024 — May 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESEARCH ── -->
+<section id="research">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">Vulnerability Research</div>
+    <div class="sec-body">
+      <div class="research-items">
+        <div class="research-item">
+          <span class="research-text">Reported valid vulnerabilities through responsible disclosure programs to <span class="gold">Google</span>, <span class="gold">OpenAI</span>, <span class="gold">Canva</span>, and other bugbounty programs.</span>
+        </div>
+        <div class="research-item">
+          <span class="research-text">Identified and responsibly disclosed a <span class="gold">Remote Code Execution (RCE)</span> vulnerability in the FlagEmbedding library.</span>
+        </div>
+        <div class="research-item">
+          <span class="research-text">Discovered a <span class="gold">security scanner bypass</span> in PickleScan, demonstrating a limitation in malicious payload detection and responsibly reported the finding.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">Projects</div>
+    <div class="sec-body">
+      <div class="proj-carousel">
+        <button class="proj-arrow prev" type="button" aria-label="Previous project">←</button>
+        <button class="proj-arrow next" type="button" aria-label="Next project">→</button>
+      <div class="proj-list">
+
+        <article class="proj-row">
+          <img class="proj-banner" src="banners/amara.jpg" width="1920" height="1080" loading="lazy"
+               alt="AMARA banner — a gold circuit-board trojan horse above the AMARA wordmark">
+          <div class="proj-info">
+            <div class="proj-head">
+              <div>
+                <h3 class="proj-name">AMARA</h3>
+                <div class="proj-tagline">AI Malware &amp; Risk Analyzer</div>
+              </div>
+              
+            </div>
+            <p class="proj-desc">AI supply-chain security scanner that analyzes ML models and datasets for malicious artifacts, unsafe deserialization, and potentially dangerous custom loader code. Generates policy-based security verdicts to support safer model and dataset adoption.</p>
+            <a class="proj-link" href="https://amarascan.com" target="_blank" rel="noopener">amarascan.com ↗</a>
+          </div>
+        </article>
+
+        <article class="proj-row">
+          <img class="proj-banner" src="banners/caido-mcp.jpg" width="1920" height="1080" loading="lazy"
+               alt="Caido-MCP banner — the Caido dragon mark beside the caido-mcp wordmark">
+          <div class="proj-info">
+            <div class="proj-head">
+              <div>
+                <h3 class="proj-name">Caido-MCP</h3>
+                <div class="proj-tagline">AI-Powered Access to Caido</div>
+              </div>
+            </div>
+            <p class="proj-desc">MCP server integrating Caido's web security capabilities with AI agents to support AI-assisted penetration-testing workflows across proxy, replay, findings, and automation.</p>
+            <a class="proj-link" href="https://github.com/mdaseem03/caido-mcp" target="_blank" rel="noopener">github.com/mdaseem03/caido-mcp ↗</a>
+          </div>
+        </article>
+
+        <article class="proj-row">
+          <img class="proj-banner" src="banners/gh0str3c0n-cli.jpg" width="1920" height="1080" loading="lazy"
+               alt="Gh0str3c0n-CLI banner — the tool's ASCII-art wordmark on a terminal background">
+          <div class="proj-info">
+            <div class="proj-head">
+              <div>
+                <h3 class="proj-name">Gh0str3c0n-CLI</h3>
+                <div class="proj-tagline">Automated Web Reconnaissance</div>
+              </div>
+            </div>
+            <p class="proj-desc">Reconnaissance CLI integrating subdomain enumeration, crawling, port scanning, and directory brute-forcing into a single tool.</p>
+            <a class="proj-link" href="https://github.com/mdaseem03/gh0str3c0n-cli" target="_blank" rel="noopener">github.com/mdaseem03/gh0str3c0n-cli ↗</a>
+          </div>
+        </article>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">Skills</div>
+    <div class="sec-body">
+      <div class="skills-grid">
+        <div>
+          <div class="eyebrow skill-grp-title">Application Security</div>
+          <div class="tags">
+            <span class="tag">SAST</span><span class="tag">DAST</span><span class="tag">SCA</span>
+            <span class="tag">Web Application Security</span><span class="tag">API Security</span>
+            <span class="tag">OWASP Top 10</span><span class="tag">Threat Modelling</span>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow skill-grp-title">AI Security</div>
+          <div class="tags">
+            <span class="tag">LLM Security</span><span class="tag">AI Supply-Chain Security</span>
+            <span class="tag">MCP &amp; Agent Security</span><span class="tag">OWASP Top 10 for LLMs</span>
+            <span class="tag">MAESTRO Framework</span><span class="tag">AI Guardrails</span><span class="tag">AI Evals</span>
+            <span class="tag">MITRE ATLAS</span>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow skill-grp-title">Cloud &amp; Infrastructure</div>
+          <div class="tags">
+            <span class="tag">AWS Security</span>
+            <span class="tag">Container Security</span><span class="tag">CSPM</span>
+            <span class="tag">Infrastructure Penetration Testing</span>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow skill-grp-title">Programming</div>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">JavaScript</span>
+            <span class="tag">Java</span><span class="tag">Bash</span>
+            <span class="tag">C</span><span class="tag">MySQL</span>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow skill-grp-title">Tools</div>
+          <div class="tags">
+            <span class="tag">Checkmarx</span><span class="tag">Burp Suite</span>
+            <span class="tag">GitGuardian</span><span class="tag">JFrog</span>
+            <span class="tag">Qualys</span><span class="tag">Nessus</span>
+            <span class="tag">Jenkins</span><span class="tag">Git</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CERTIFICATIONS ── -->
+<section id="certifications">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">Certifications</div>
+    <div class="sec-body">
+      <div class="proj-carousel">
+        <button class="proj-arrow prev" type="button" aria-label="Previous certification">←</button>
+        <button class="proj-arrow next" type="button" aria-label="Next certification">→</button>
+      <div class="proj-list">
+
+        <article class="proj-row">
+          <img class="proj-banner" src="banners/CAP.png" width="996" height="697" loading="lazy"
+               alt="Certified AppSec Practitioner certificate of achievement from The SecOps Group, awarded with merit">
+          <div class="proj-info cert-info">
+            <h3 class="cert-name">Certified AppSec Practitioner (CAP)</h3>
+            <div class="cert-issuer">The SecOps Group · Feb 2024</div>
+          </div>
+        </article>
+
+        <article class="proj-row">
+          <img class="proj-banner" src="banners/SC900.jpg" width="1039" height="795" loading="lazy"
+               alt="Microsoft Certified: Security, Compliance, and Identity Fundamentals certificate">
+          <div class="proj-info cert-info">
+            <h3 class="cert-name">SC-900: Microsoft Security, Compliance, and Identity Fundamentals</h3>
+            <div class="cert-issuer">Microsoft · Jul 2023</div>
+          </div>
+        </article>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Mohammed <strong>Aseem</strong> &nbsp;·&nbsp; Security Engineer</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.proj-carousel').forEach(function (carousel) {
+  var list = carousel.querySelector('.proj-list');
+  var cards = list.children;
+  var prev = carousel.querySelector('.proj-arrow.prev');
+  var next = carousel.querySelector('.proj-arrow.next');
+  function pitch() { return cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : list.clientWidth; }
+  function idx() { return Math.round(list.scrollLeft / pitch()); }
+  function goTo(i) { i = Math.max(0, Math.min(cards.length - 1, i)); list.scrollTo({ left: i * pitch() }); }
+  function update() {
+    var i = idx();
+    prev.disabled = i <= 0;
+    next.disabled = i >= cards.length - 1;
+  }
+  prev.addEventListener('click', function () { goTo(idx() - 1); });
+  next.addEventListener('click', function () { goTo(idx() + 1); });
+  list.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+
+  var down = false, moved = false, startX = 0, startLeft = 0;
+  list.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    down = true; moved = false; startX = e.clientX; startLeft = list.scrollLeft;
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    var dx = e.clientX - startX;
+    if (!moved && Math.abs(dx) > 5) { moved = true; list.classList.add('is-dragging'); }
+    if (moved) list.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('pointerup', function () {
+    if (!down) return;
+    down = false;
+    if (!moved) return;
+    list.classList.remove('is-dragging');
+    goTo(idx());
+  });
+  list.addEventListener('click', function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
+});
+</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn  = document.getElementById('themeBtn');
+  var icon = document.getElementById('themeIcon');
+  var text = document.getElementById('themeText');
+
+  function setTheme(t) {
+    var dark = t === 'dark';
+    root.setAttribute('data-theme', t);
+    icon.textContent = dark ? '☾' : '☀';
+    text.textContent = dark ? 'Dark' : 'Light';
+    btn.setAttribute('aria-checked', dark ? 'true' : 'false');
+    try { localStorage.setItem('pf-theme', t); } catch (e) {}
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem('pf-theme'); } catch (e) {}
+  if (saved === 'dark' || saved === 'light') {
+    setTheme(saved);
+  } else {
+    setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+
+  btn.addEventListener('click', function () {
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  var menuBtn  = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function () {
+    var open = navLinks.classList.toggle('is-open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      navLinks.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
+</body>
+</html>
