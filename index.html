@@ -447,6 +447,20 @@ section {
 .cert-issuer { font-size: 12.5px; color: var(--muted); }
 .proj-row .cert-info { gap: 6px; }
 
+/* ── BLOG — latest posts in the same floating-panel carousel ── */
+.blog-cover { aspect-ratio: 16 / 9; object-fit: cover; }
+.blog-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 12px; color: var(--muted); }
+.blog-all {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--gold-ink);
+  text-decoration: none;
+}
+.blog-all:hover { text-decoration: underline; text-underline-offset: 4px; }
+
 /* ── FOOTER ── */
 footer {
   padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -532,6 +546,7 @@ img { max-width: 100%; }
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#blog">Blog</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeBtn" role="switch" aria-checked="false" aria-label="Dark mode">
@@ -773,6 +788,63 @@ img { max-width: 100%; }
 
       </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG ── -->
+<section id="blog">
+  <div class="sec-inner">
+    <div class="eyebrow sec-label">Blog</div>
+    <div class="sec-body">
+      <div class="proj-carousel">
+        <button class="proj-arrow prev" type="button" aria-label="Previous post">←</button>
+        <button class="proj-arrow next" type="button" aria-label="Next post">→</button>
+      <div class="proj-list">
+
+        <article class="proj-row">
+          <img class="proj-banner blog-cover" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5kEXapxOqDDLAmis4hLVRg.jpeg" loading="lazy" alt="">
+          <div class="proj-info">
+            <div class="blog-meta"><span class="proj-badge">Blockchain</span><span>Part 2 · 7 min read</span></div>
+            <h3 class="proj-name">Decoding WazirX Assets Breach (Part 2)</h3>
+            <p class="proj-desc">Following the attacker on-chain: Tornado Cash funding, the phishing contract, the delegatecall upgrade, and where $230M+ ended up.</p>
+            <a class="proj-link" href="blogs/blockchain/wazirx-p2.html">Read post →</a>
+          </div>
+        </article>
+
+        <article class="proj-row">
+          <img class="proj-banner blog-cover" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FwQ-WuYFfjbo_cDV34AgPA.jpeg" loading="lazy" alt="">
+          <div class="proj-info">
+            <div class="blog-meta"><span class="proj-badge">Blockchain</span><span>Part 1 · 4 min read</span></div>
+            <h3 class="proj-name">Decoding WazirX Assets Breach</h3>
+            <p class="proj-desc">How $234.9M was drained from WazirX’s Liminal-managed multisig hot wallet, and what the first on-chain analysis revealed.</p>
+            <a class="proj-link" href="blogs/blockchain/wazirx-p1.html">Read post →</a>
+          </div>
+        </article>
+
+        <article class="proj-row">
+          <img class="proj-banner blog-cover" src="https://miro.medium.com/v2/resize:fit:1080/format:webp/0*zq6uXzixI0f-_Rgn.jpg" loading="lazy" alt="">
+          <div class="proj-info">
+            <div class="blog-meta"><span class="proj-badge">Tools</span><span>3 min read</span></div>
+            <h3 class="proj-name">NMAP Port Scanning Deep Dive</h3>
+            <p class="proj-desc">What actually happens on the wire during TCP, SYN and UDP scans, and how Nmap decides a port is open, closed or filtered.</p>
+            <a class="proj-link" href="blogs/tools/nmap.html">Read post →</a>
+          </div>
+        </article>
+
+        <article class="proj-row">
+          <img class="proj-banner blog-cover" src="https://blogger.googleusercontent.com/img/a/AVvXsEiG0Bum1oAbye__XpVDHBgvQKLYcLk9VZz9x7HUHgohAd0uNUcTgwhEyJdNSXxKPRnMil13cf96Dwm6xjKXJo9xYn70mTmpc-D_qJGuxsbpRSkQRExlmz2eDwFmQoQusrlZ6nJAvjFFwwKbTKsHF3NFNnqQubUkos7chEpC2Z3SG6yZSPj-LdtMhJQo" loading="lazy" alt="">
+          <div class="proj-info">
+            <div class="blog-meta"><span class="proj-badge">Basics</span><span>4 min read</span></div>
+            <h3 class="proj-name">Understanding Kernel, Distros and File Systems in Linux</h3>
+            <p class="proj-desc">Is Linux an OS or a kernel? What a kernel does, where distros come from, and what lives in each Linux directory.</p>
+            <a class="proj-link" href="blogs/basics/linux-kernel-distros-filesystems.html">Read post →</a>
+          </div>
+        </article>
+
+      </div>
+      </div>
+      <a class="blog-all" href="blogs/index.html">View all Blogs →</a>
     </div>
   </div>
 </section>
